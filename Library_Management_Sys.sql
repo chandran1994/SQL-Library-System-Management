@@ -1,41 +1,8 @@
-# Library System Management SQL Project
+-- Library System Management SQL Project
 
-## Project Overview
+-- Create database library_sys_management;
 
-**Project Title**: Library System Management  
-**Level**: Intermediate  
-**Database**: `library_sys_management`
-
-This project demonstrates the implementation of a Library Management System using SQL. The project focuses on relational database design, CRUD operations, table relationships, CTAS operations, and analytical SQL queries using PostgreSQL.
-
----
-
-# Objectives
-
-1. Create and manage a relational database for a library system.
-2. Implement primary key and foreign key relationships.
-3. Perform CRUD operations using SQL.
-4. Use joins and aggregations for analysis.
-5. Create summary tables using CTAS.
-6. Generate operational insights using analytical queries.
-
----
-
-# Project Structure
-
-## 1. Database Setup
-
-### Database Creation
-
-```sql
-create database library_sys_management;
-```
-
----
-
-### Create Table `branch`
-
-```sql
+-- Create table "Branch"
 create table branch
 (
  branch_id varchar(10) primary key,
@@ -43,13 +10,9 @@ create table branch
  branch_address varchar(30),
  contact_no varchar(15)           
 );
-```
+select * from branch;
 
----
-
-### Create Table `employees`
-
-```sql
+-- Create table "Employee"
 create table employees
 (
  emp_id varchar(10) primary key,
@@ -59,13 +22,9 @@ create table employees
  branch_id varchar(10),
  foreign key (branch_id) references branch(branch_id)
 );
-```
+select * from employees;
 
----
-
-### Create Table `members`
-
-```sql
+-- Create table "Members"
 create table members
 (
  member_id varchar(10) primary key,
@@ -73,13 +32,10 @@ create table members
  member_address varchar(30),
  reg_date date
 );
-```
+select * from members;
 
----
 
-### Create Table `books`
-
-```sql
+-- Create table "Books"
 create table books
 (
  isbn varchar(50) primary key,
@@ -90,13 +46,10 @@ create table books
  author varchar(30),
  publisher varchar(30)
 );
-```
+select * from books;
 
----
 
-### Create Table `issued_status`
-
-```sql
+-- Create table "IssueStatus"
 create table issued_status
 (
  issued_id varchar(10) primary key,
@@ -109,13 +62,10 @@ create table issued_status
  foreign key (issued_emp_id) references employees(emp_id),
  foreign key (issued_book_isbn) references books(isbn) 
 );
-```
+select * from issued_status;
 
----
 
-### Create Table `return_status`
-
-```sql
+-- Create table "ReturnStatus"
 create table return_status
 (
  return_id varchar(10) PRIMARY KEY,
@@ -125,71 +75,59 @@ create table return_status
  return_book_isbn varchar(50),
  foreign key (return_book_isbn) references books(isbn)
 );
-```
-## Entity Relationship Diagram (ERD)
+select * from return_status;
 
-![Library ERD](library_erd.png)
 
----
+-- CRUD Operations
+-- Task 1. Create a New Book Record '978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.'
+select * from books;
 
-# 2. CRUD Operations
-
-## Task 1: Create a New Book Record
-
-```sql
 insert into books(isbn, book_title, category, rental_price, status, author, publisher)
 values
 ('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.');
-```
 
----
+-- Task 2: Update an Existing Member's Address
+select * from members;
 
-## Task 2: Update an Existing Member's Address
-
-```sql
 update members
 set member_address = '125 Main St'
 where member_id = 'C101';
-```
 
----
+-- Task 3: Delete the record with issued_id = 'IS107' from the issued_status table.
+select * from issued_status;
 
-## Task 3: Delete Records from `issued_status`
-
-```sql
 delete from issued_status
 where issued_id = 'IS107';
-```
 
----
+-- Task 4: Retrieve All Books Issued by a Specific Employee with emp_id = 'E101'.
+select * from issued_status;
 
-## Task 4: Retrieve All Books Issued by a Specific Employee
-
-```sql
 select * from issued_status
 where issued_emp_id = 'E101';
-```
 
----
+--Task 5: List Members Who Have Issued More Than One Book.
+select * from issued_status;
 
-## Task 5: List Members Who Have Issued More Than One Book
-
-```sql
 select 
      issued_emp_id, 
 	 count(issued_id) as total_book_issued 
 from issued_status 
 group by issued_emp_id
-having count (issued_id) > 1;
-```
+having count (issued_id) > 1
+;
 
----
 
-# 3. CTAS (Create Table As Select)
+-- CTAS (Create Table As Select)
+-- Task 6: Create Summary Tables : Use CTAS to generate new tables based on query results - each book and total book_issued_cnt
+select * from books;
+select * from issued_status;
 
-## Task 6: Create Summary Table for Issued Books
+select * 
+from books as b
+join 
+issued_status as ist
+on ist.issued_book_isbn = b.isbn;
 
-```sql
 create table book_cnts
 as
 select 
@@ -201,24 +139,19 @@ join
 issued_status as ist 
 on ist.issued_book_isbn = b.isbn
 group by 1,2;
-```
 
----
 
-# 4. Data Analysis & Findings
+-- Data Analysis & Findings
+-- Task 7. Retrieve All Books in a Specific Category: Classic
+select * from books;
 
-## Task 7: Retrieve All Books in a Specific Category
-
-```sql
 select * from books 
 where category = 'Classic';
-```
 
----
+-- Task 8: Find Total Rental Income by Category: Classic
+select * from books;
+select * from issued_status;
 
-## Task 8: Find Total Rental Income by Category
-
-```sql
 select
    b.category,
    sum(b.rental_price),
@@ -228,22 +161,23 @@ join
 issued_status as ist 
 on ist.issued_book_isbn = b.isbn
 group by 1;
-```
 
----
+-- Task 9. List Members Who Registered in the Last 180 Days:
+update members
+set reg_date = '2026-01-01'
+where member_id = 'C101';
 
-## Task 9: List Members Who Registered in the Last 180 Days
+update members
+set reg_date = '2026-01-25'
+where member_id = 'C119';
 
-```sql
 select * from members
 where reg_date >= current_date - interval '180 days';
-```
 
----
+-- Task 10: List Employees with Their Branch Manager's Name and their branch details:
+select * from employees;
+select * from branch;
 
-## Task 10: List Employees with Their Branch Manager and Branch Details
-
-```sql
 select 
      e1.*,
 	 e2.emp_name as manager,
@@ -255,24 +189,16 @@ select
  join 
  employees as e2
  on b.manager_id = e2.emp_id;
-```
-
----
-
-## Task 11: Create a Table of Books with Rental Price Above 7
-
-```sql
+ 
+-- Task 11. Create a Table of Books with Rental Price Above a Certain Threshold - 7USD: 
 create table books_price_greater_than_7
 as
 select * from books
 where rental_price > 7;
-```
 
----
+select * from books_price_greater_than_7;
 
-## Task 12: Retrieve Books Not Yet Returned
-
-```sql
+-- Task 12: Retrieve the List of Books Not Yet Returned.
 select 
   distinct ist.issued_book_name
 from issued_status as ist 
@@ -281,24 +207,22 @@ return_status as rs
 on 
 ist.issued_id = rs.issued_id
 where rs.return_id is null;
-```
 
----
+/*
+Task 13: Identify Members with Overdue Books
+Write a query to identify members who have overdue books (assume a 30-day return period). Display the member's id, member's name, book title, 
+issue date, and days overdue.
+*/
+-- issued_status == members == books == return_status
+-- filter books which is returned
+-- overdue > 30 days 
 
-## Task 13: Identify Members with Overdue Books
-
-### Objective
-
-Identify members who have overdue books assuming a 30-day return period.
-
-### Query
-
-```sql
 select
    ist.issued_member_id,
    m.member_name,
    bk.book_title,
    ist.issued_date,
+  -- rs.return_date,
    current_date - ist.issued_date as over_dues
 from issued_status as ist
 join 
@@ -316,28 +240,6 @@ where
     rs.return_date is null
 	and
 	(current_date - ist.issued_date) > 30
-order by 1;
-```
-
----
-
-# Findings
-
-- The project demonstrates practical usage of relational database concepts.
-- Joins and aggregations were used to generate business insights.
-- CTAS operations were used to create summary tables.
-- Overdue books and pending returns were identified using date arithmetic.
-- Analytical queries helped generate operational reports from the library database.
-
----
-
-# Conclusion
-
-This project helped strengthen my understanding of:
-
-- relational database design
-- sql querying
-- joins and table relationships
-- ctas operations
-- analytical sql queries
-- business problem solving using sql.
+order by 1
+; 
+-- project end.
