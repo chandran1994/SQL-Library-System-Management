@@ -4,20 +4,15 @@
 
 **Project Title**: Library System Management  
 **Level**: Intermediate  
-**Database**: `library_sys_management`
+**Database**: `library_sys_management`.
 
-In this project, I designed and built a Library Management System in PostgreSQL to practice database design, table relationships, SQL querying, and reporting. The database simulates a real library environment where books can be issued and returned, members can register with different branches, and employees manage daily operations. Along the way, I used CRUD operations, joins, aggregations, CTAS statements, and analytical queries to answer common business questions and generate operational reports.
+Project Outcomes
 
----
+Through the development of this system, I was able to build a fully functional relational database that supports the core operations of a library. The project covered database design, transaction management, reporting, and business analysis using SQL.
 
-# Objectives
+By working with multiple related tables and realistic business scenarios, I gained practical experience creating relationships between entities, writing complex queries, and transforming operational data into meaningful reports that support decision-making.
 
-1. Create and manage a relational database for a library system.
-2. Implement primary key and foreign key relationships.
-3. Perform CRUD operations using SQL.
-4. Use joins and aggregations for analysis.
-5. Create summary tables using CTAS.
-6. Generate operational insights using analytical queries.
+The analytical queries developed throughout the project provide visibility into book circulation, member activity, rental revenue, overdue books, and branch operations.
 
 ---
 
