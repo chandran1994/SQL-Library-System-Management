@@ -340,4 +340,4 @@ This project helped strengthen my understanding of:
 - joins and table relationships
 - ctas operations
 - analytical sql queries
-- business problem solving using sql.
+- business problem solving using sql
