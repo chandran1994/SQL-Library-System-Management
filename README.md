@@ -6,7 +6,7 @@
 **Level**: Intermediate  
 **Database**: `library_sys_management`
 
-This project demonstrates the implementation of a Library Management System using SQL. The project focuses on relational database design, CRUD operations, table relationships, CTAS operations, and analytical SQL queries using PostgreSQL.
+In this project, I designed and built a Library Management System in PostgreSQL to practice database design, table relationships, SQL querying, and reporting. The database simulates a real library environment where books can be issued and returned, members can register with different branches, and employees manage daily operations. Along the way, I used CRUD operations, joins, aggregations, CTAS statements, and analytical queries to answer common business questions and generate operational reports.
 
 ---
 
@@ -321,23 +321,10 @@ order by 1;
 
 ---
 
-# Findings
-
-- The project demonstrates practical usage of relational database concepts.
-- Joins and aggregations were used to generate business insights.
-- CTAS operations were used to create summary tables.
-- Overdue books and pending returns were identified using date arithmetic.
-- Analytical queries helped generate operational reports from the library database.
-
----
-
 # Conclusion
 
-This project helped strengthen my understanding of:
+This project provided hands-on experience in designing and managing a relational database from the ground up. Beyond creating tables and relationships, the focus was on using SQL to solve operational problems and answer business questions.
 
-- relational database design
-- sql querying
-- joins and table relationships
-- ctas operations
-- analytical sql queries
-- business problem solving using sql
+Working through real-world scenarios such as tracking issued books, identifying overdue returns, measuring rental performance, and generating summary reports strengthened my understanding of relational database design, data modeling, SQL querying, joins, aggregations, CTAS operations, and business reporting.
+
+The project demonstrates how SQL can be used not only to store data, but also to generate actionable insights that support day-to-day operations and decision-making.
