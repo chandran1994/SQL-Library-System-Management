@@ -318,8 +318,8 @@ order by 1;
 
 # Conclusion
 
-This project provided hands-on experience in designing and managing a relational database from the ground up. Beyond creating tables and relationships, the focus was on using SQL to solve operational problems and answer business questions.
+This project provided hands-on experience in designing and managing a relational database from the ground up. Beyond creating tables and relationships, the focus was on using SQL to solve operational problems and answer business questions
 
-Working through real-world scenarios such as tracking issued books, identifying overdue returns, measuring rental performance, and generating summary reports strengthened my understanding of relational database design, data modeling, SQL querying, joins, aggregations, CTAS operations, and business reporting.
+Working through real-world scenarios such as tracking issued books, identifying overdue returns, measuring rental performance, and generating summary reports strengthened my understanding of relational database design, data modeling, SQL querying, joins, aggregations, CTAS operations, and business reporting
 
-The project demonstrates how SQL can be used not only to store data, but also to generate actionable insights that support day-to-day operations and decision-making.
+The project demonstrates how SQL can be used not only to store data, but also to generate actionable insights that support day-to-day operations and decision-making
