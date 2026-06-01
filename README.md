@@ -6,7 +6,7 @@
 **Level**: Intermediate  
 **Database**: `library_sys_management`.
 
-Project Outcomes
+Project Outcomes -
 
 Through the development of this system, I was able to build a fully functional relational database that supports the core operations of a library. The project covered database design, transaction management, reporting, and business analysis using SQL.
 
